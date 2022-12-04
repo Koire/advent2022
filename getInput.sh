@@ -1,1 +1,1 @@
-curl  https://adventofcode.com/2022/day/$1/input -H 'Cookie: session=$2' >> input.txt
+curl  https://adventofcode.com/2022/day/$1/input -H 'Cookie: session=53616c7465645f5f0473bdabc726ab7c5b412e621147186c87be8029607ad2bf4c57ed6ca956d90ab439399507101425ae8a5739205a7d8c2425cee4a22bbacb' >> input.txt
