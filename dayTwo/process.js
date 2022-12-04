@@ -16,6 +16,7 @@ const pt2Mapping = {
         "target": "lose",
     }
 }
+
 const scoring = {
     "rock": {
         "points" : 1,
@@ -35,7 +36,6 @@ const scoring = {
         "draw": ["paper"],
         "win" : ["rock"]
     }
-
 }
 
 const  mapping = {
@@ -47,7 +47,6 @@ const  mapping = {
 const LOST_VALUE = 0
 const DRAW_VALUE = 3
 const WIN_VALUE = 6
-
 
 const evalTurn = ([opponent, self], strategic=false) => {
     if (!self || !opponent) return 0
