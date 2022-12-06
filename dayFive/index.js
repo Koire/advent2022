@@ -112,8 +112,7 @@ const doPartOne = async () => {
     })
     .flatMap(fn => fn)
     .reduce((lastFn, currentFn) => {
-            return lastFn.then(() => new Promise((res) => setTimeout(() => res(currentFn()), 300)))
+            return lastFn.then(() => new Promise((res) => setTimeout(() => res(currentFn()), 50)))
     }, startPromise)
 }
-await doPartOne()
-console.log(doPartOne())
+doPartOne()
