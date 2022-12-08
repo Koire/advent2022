@@ -5,6 +5,7 @@ import { delayPromise } from "../lib/arrayHelpers.mjs"
 
 const input = document.getElementById("input")
 const fileOutput = document.getElementById("fileOutput")
+const commandInput = document.getElementById("command")
 
 const findLowDirs = (limit = 100000, limiting = false) => {
     const recurse = (dirs) => {
@@ -59,11 +60,24 @@ const part2 = ({fs, ...rest}) => {
         fs, ...rest
     }
 }
+const initCommand = ({fs, ...rest}) => {
+    fs.cd("/")
+    commandInput.addEventListener("keyup", (event) => {
+        const value = event.target.value
+        console.log(value)
+        if(value.includes("cd")) {
+            fs.cd(value.split(" ")[1])
+            fileOutput.innerHTML = fs.ls().dirs.map(dir => dir.name).join("<br\>") + fs.ls().files.map(file => file.name + " " + file.size + " bytes").join("<br\>")
+        }
+    })
+}
+
 await asPipe(
     importInput,
     generateCommands,
     part1,
     part2,
-    visualCommands,
+    initCommand,
+    //visualCommands,
     console.log
 )("input.txt")
