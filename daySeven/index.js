@@ -35,7 +35,7 @@ const visualCommands = ({commandList, fs, ...rest}) => {
     }
 }
 
-const generateCommands = (readLines) => {
+const initFileSystem = (readLines) => {
     const fs = fileSystem()
     const commandList = readLines.map(_line => {
         const splitLine = _line.split(" ")
@@ -65,6 +65,16 @@ const initCommand = ({fs, ...rest}) => {
     commandInput.addEventListener("keyup", (event) => {
         const value = event.target.value
         console.log(value)
+        if(value == "ls"){
+            fileOutput.innerHTML = fs.ls().dirs.map(dir => dir.name).join("<br\>") + fs.ls().files.map(file => file.name + " " + file.size + " bytes").join("<br\>")
+        }
+        if(value == "du" ) {
+            fileOutput.innerHTML = `${fs.du()} bytes`
+        }
+        if(value.includes("mkdir")) {
+            fs.mkdir(value.split(" ")[1])
+            fileOutput.innerHTML = fs.ls().dirs.map(dir => dir.name).join("<br\>") + fs.ls().files.map(file => file.name + " " + file.size + " bytes").join("<br\>")
+        }
         if(value.includes("cd")) {
             fs.cd(value.split(" ")[1])
             fileOutput.innerHTML = fs.ls().dirs.map(dir => dir.name).join("<br\>") + fs.ls().files.map(file => file.name + " " + file.size + " bytes").join("<br\>")
@@ -74,7 +84,7 @@ const initCommand = ({fs, ...rest}) => {
 
 await asPipe(
     importInput,
-    generateCommands,
+    initFileSystem,
     part1,
     part2,
     initCommand,
