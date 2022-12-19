@@ -62,6 +62,7 @@ const part2 = ({fs, ...rest}) => {
 }
 const initCommand = ({fs, ...rest}) => {
     fs.cd("/")
+    fileOutput.innerHTML = fs.ls().dirs.map(dir => dir.name).join("<br\>") + fs.ls().files.map(file => file.name + " " + file.size + " bytes").join("<br\>")
     commandInput.addEventListener("keyup", (event) => {
         const value = event.target.value
         console.log(value)
